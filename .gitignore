@@ -1,0 +1,11 @@
+node_modules/
+dist/
+build/
+.vscode/
+.DS_Store
+*.log
+Backend/venv/
+Backend/.env
+Backend/__pycache__
+*.env
+nightmare_models/
