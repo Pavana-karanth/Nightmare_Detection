@@ -1,11 +1,64 @@
+# ==========================================================
+# OS / Editor Config
+# ==========================================================
+.DS_Store
+Thumbs.db
+.vscode/
+*.log
+
+# ==========================================================
+# Node / Frontend
+# ==========================================================
 node_modules/
 dist/
 build/
-.vscode/
-.DS_Store
-*.log
+out/
+.next/
+coverage/
+
+# Yarn / PnP
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# Vercel deployment
+.vercel/
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Ignore environment files (frontend & backend)
+.env
+.env.*
+*.env
+Frontend/.env.local
+
+# ==========================================================
+# Python / Backend
+# ==========================================================
 Backend/venv/
 Backend/.env
-Backend/__pycache__
-*.env
+Backend/__pycache__/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+
+# ML / Data Files
+*.pth
+*.pt
+*.h5
+*.npy
+*.npz
 nightmare_models/
+
+# ==========================================================
+# Project specific
+# ==========================================================
+# Anything else you want ignored goes here
