@@ -1,52 +1,48 @@
-# Nightmare Detection — Backend
 
-This repository contains the backend service for the Nightmare Detection project. It includes the model loading code, API endpoints, and environment setup for local development.
+````markdown
+# Nightmare Detection – Local Setup Guide
 
----
-
-## 📁 Project Structure
-
-```
-backend/
-│── venv/                # Python virtual environment
-│── main.py              # Main application file (FastAPI)
-│── model/               # Model weights and related files
-│── requirements.txt     # Python dependencies
-│── README.md            # Project documentation
-```
+This guide explains how to run the Backend (FastAPI) and Frontend (Next.js) locally.
 
 ---
 
-## 🔧 1. Clone This Repository
+## 1. Clone the Repository
 
 ```bash
 git clone https://github.com/Pavana-karanth/Nightmare_Detection.git
 cd Nightmare_Detection
-```
+````
 
 ---
 
-## 🐍 2. Create and Activate Virtual Environment
+# Backend Setup (FastAPI)
 
-### **Windows**
+## 2. Create a Virtual Environment
+
+Navigate to the Backend directory:
 
 ```bash
+cd Backend
 python -m venv venv
+```
+
+Activate the virtual environment:
+
+**Windows:**
+
+```bash
 venv\Scripts\activate
 ```
 
-### **Mac/Linux**
+**macOS / Linux:**
 
 ```bash
-python3 -m venv venv
 source venv/bin/activate
 ```
 
 ---
 
-## 📦 3. Install Dependencies
-
-Make sure your virtual environment is activated.
+## 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -54,54 +50,124 @@ pip install -r requirements.txt
 
 ---
 
-## 🚀 4. Run the Backend Server
+## 4. Create a `.env` File
+
+Create a `.env` file inside the `Backend/` directory with the following content:
+
+```
+MODEL_PATH=./models/robust_deep_svdd.pth
+PORT=8000
+```
+
+---
+
+## 5. Run the Backend Server
+
+Make sure you are inside the `Backend/` directory with the virtual environment activated:
 
 ```bash
-uvicorn main:app --reload
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-The server will start at:
+The backend will run at:
 
 ```
-http://127.0.0.1:8000
-```
-
----
-
-## 🌐 5. Test the API
-
-Open in browser:
-
-```
-http://127.0.0.1:8000/docs
+http://127.0.0.1:8000/
 ```
 
 ---
 
-## 🔄 6. Git: Connecting Local Project to GitHub
+# Frontend Setup (Next.js)
 
-If you created the folder first and then the GitHub repo:
+Open a new terminal window. Keep the backend running.
+
+## 6. Install Node Modules
+
+Navigate to the Frontend directory:
 
 ```bash
-git init
-git add .
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin https://github.com/Pavana-karanth/Nightmare_Detection.git
-git pull origin main --allow-unrelated-histories
-git push -u origin main
+cd Frontend
+npm install
 ```
 
 ---
 
-## 📝 Notes
+## 7. Create a `.env.local` File
 
-* Keep the virtual environment **inside the backend folder** if you prefer local isolation.
-* Do **not** push the `venv/` folder; your `.gitignore` should include it.
-* Update `requirements.txt` whenever you install new dependencies:
+Inside the `Frontend/` directory, create a file named `.env.local` with the following content:
+
+```
+NEXT_PUBLIC_API_URL=http://localhost:8000
+```
+
+---
+
+## 8. Start the Frontend Development Server
+
+From inside the `Frontend/` directory:
 
 ```bash
-pip freeze > requirements.txt
+npm run dev
+```
+
+The frontend will run at:
+
+```
+http://localhost:3000/
 ```
 
 ---
+
+# Additional Notes
+
+### Node Version
+
+If you face Node version issues, install and use a compatible version using nvm:
+
+```bash
+nvm install 18
+nvm use 18
+```
+
+### Reinstalling Node Modules
+
+If node modules break or are missing:
+
+```bash
+rm -rf node_modules package-lock.json
+npm install
+```
+
+### Stopping Servers
+
+Press:
+
+```
+CTRL + C
+```
+
+to stop the backend or frontend server.
+
+---
+
+# Project Structure Overview
+
+```
+Nightmare_Detection/
+│
+├── Backend/
+│   ├── venv/
+│   ├── main.py
+│   ├── models/
+│   ├── requirements.txt
+│   └── .env
+│
+└── Frontend/
+    ├── node_modules/
+    ├── pages/
+    ├── components/
+    ├── public/
+    └── .env.local
+```
+
+```
