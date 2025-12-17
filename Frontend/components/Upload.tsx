@@ -68,7 +68,7 @@ export default function Upload({ onAnalysisComplete }: UploadProps) {
     formData.append("file", selectedFile)
 
     try {
-      const response = await axios.post<AnalysisResult>(`${API_ENDPOINTS.ANALYZE}?stage=${sleepStage}`, formData, {
+      const response = await axios.post<AnalysisResult>(`${API_ENDPOINTS.ANALYZE}/${sleepStage}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
