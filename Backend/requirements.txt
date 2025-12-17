@@ -1,4 +1,4 @@
 fastapi[all]
-torch
-torchvision
-python-jose[cryptography]==3.3.0
+
+--index-url https://download.pytorch.org/whl/cpu
+torch==2.9.1+cpu
