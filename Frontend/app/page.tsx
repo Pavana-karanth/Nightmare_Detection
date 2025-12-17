@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Header from "@/components/Header"
 import TabNavigation from "@/components/TabNavigation"
 import Overview from "@/components/Overview"
@@ -14,14 +14,26 @@ export default function Home() {
   const [results, setResults] = useState<AnalysisResult[]>([])
   const [isDark, setIsDark] = useState(false)
 
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme")
+    const prefersDark =
+      savedTheme === "dark" || (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)
+    setIsDark(prefersDark)
+    if (prefersDark) {
+      document.documentElement.classList.add("dark")
+    }
+  }, [])
+
   const handleAnalysisComplete = (result: AnalysisResult) => {
     setResults((prev) => [...prev, result])
     setActiveTab("analysis")
   }
 
   const toggleDarkMode = () => {
-    setIsDark(!isDark)
+    const newDarkMode = !isDark
+    setIsDark(newDarkMode)
     document.documentElement.classList.toggle("dark")
+    localStorage.setItem("theme", newDarkMode ? "dark" : "light")
   }
 
   return (
