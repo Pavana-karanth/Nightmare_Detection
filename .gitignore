@@ -49,16 +49,3 @@ __pycache__/
 *.pyo
 *.pyd
 *.egg-info/
-
-# ML / Data Files
-*.pth
-*.pt
-*.h5
-*.npy
-*.npz
-nightmare_models/
-
-# ==========================================================
-# Project specific
-# ==========================================================
-# Anything else you want ignored goes here
