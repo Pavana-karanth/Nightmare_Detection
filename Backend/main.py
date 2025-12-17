@@ -18,7 +18,6 @@ import logging
 from pathlib import Path
 from enum import Enum
 import uvicorn
-from pyngrok import ngrok
 import asyncio
 import nest_asyncio
 from contextlib import asynccontextmanager
@@ -845,8 +844,6 @@ async def validation_metrics():
 
 if __name__ == "__main__":
     nest_asyncio.apply()
-    ngrok_tunnel = ngrok.connect(Config.PORT)
-    print('Public URL:', ngrok_tunnel.public_url)
     config = uvicorn.Config(app=app, host="0.0.0.0", port=Config.PORT, log_level="info")
     server = uvicorn.Server(config)
     asyncio.get_event_loop().run_until_complete(server.serve())
