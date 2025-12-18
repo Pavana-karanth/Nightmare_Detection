@@ -107,7 +107,7 @@ export default function Upload({ onAnalysisComplete }: UploadProps) {
             }`}
           >
             <div className="text-center">
-              <div className="text-2xl mb-1">💤</div>
+              {/* <div className="text-2xl mb-1">💤</div> */}
               <div>REM Stage</div>
               <div className="text-xs mt-1 opacity-75">Rapid Eye Movement</div>
             </div>
@@ -121,7 +121,7 @@ export default function Upload({ onAnalysisComplete }: UploadProps) {
             }`}
           >
             <div className="text-center">
-              <div className="text-2xl mb-1">😴</div>
+              {/* <div className="text-2xl mb-1">😴</div> */}
               <div>N2 Stage</div>
               <div className="text-xs mt-1 opacity-75">Light Sleep</div>
             </div>
