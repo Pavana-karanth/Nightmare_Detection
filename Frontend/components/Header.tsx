@@ -9,7 +9,7 @@ export default function Header({ isDark, toggleDarkMode }: HeaderProps) {
         <div className="flex justify-between items-start">
           <div className="flex-1">
             <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">
-              NeuroTrack
+              Nightmare Disorder Diagnosis Assistant
             </h1>
             <p className="text-sm font-medium text-muted-foreground">EEG Spectrogram Analysis for Nightmare Disorder</p>
           </div>
