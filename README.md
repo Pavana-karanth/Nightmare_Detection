@@ -1,5 +1,3 @@
-
-````markdown
 # Nightmare Detection – Local Setup Guide
 
 This guide explains how to run the Backend (FastAPI) and Frontend (Next.js) locally.
