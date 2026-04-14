@@ -62,16 +62,16 @@ class Config:
         "REM": {
             "radius": 6.621957,
             "normal": 5.018054,  # 90th percentile
-            "mild": 5.468412,  # 95th percentile
-            "moderate": 6.621957,  # 99th percentile (radius)
-            "severe": 7.5,  # Above radius
+            "nightmare": 5.468412  # 95th percentile
+            # "moderate": 6.621957,  # 99th percentile (radius)
+            # "severe": 7.5,  # Above radius
         },
         "N2": {
             "radius": 6.633777,
             "normal": 5.472726,  # 90th percentile
-            "mild": 5.845134,  # 95th percentile
-            "moderate": 6.633777,  # 99th percentile
-            "severe": 7.5,  # Above radius
+            "nightmare": 5.845134  # 95th percentile
+            # "moderate": 6.633777,  # 99th percentile
+            # "severe": 7.5,  # Above radius
         },
     }
 
@@ -311,26 +311,27 @@ class NightmareDetector:
             severity = "normal"
             severity_level = 0
             is_nightmare = False
-        elif score < self.thresholds["mild"]:
-            severity = "mild"
+        else: 
+            # score < self.thresholds["nightmare"]
+            severity = "nightmare"
             severity_level = 1
             is_nightmare = True
-        elif score < self.thresholds["moderate"]:
-            severity = "moderate"
-            severity_level = 2
-            is_nightmare = True
-        elif score < self.thresholds["severe"]:
-            severity = "severe"
-            severity_level = 3
-            is_nightmare = True
-        else:
-            severity = "critical"
-            severity_level = 4
-            is_nightmare = True
+        # elif score < self.thresholds["moderate"]:
+        #     severity = "moderate"
+        #     severity_level = 2
+        #     is_nightmare = True
+        # elif score < self.thresholds["severe"]:
+        #     severity = "severe"
+        #     severity_level = 3
+        #     is_nightmare = True
+        # else:
+        #     severity = "critical"
+        #     severity_level = 4
+        #     is_nightmare = True
 
         # Compute probability scores (normalized against calibration distribution)
         # Based on validation: normal dreams mean ≈ 3.8-4.1, nightmares ≈ 73-93 percentile
-        max_observed = self.thresholds["severe"] * 1.5  # Conservative upper bound
+        max_observed = self.thresholds["nightmare"] * 1.5  # Conservative upper bound
         normalized_score = min(score / max_observed, 1.0)
 
         nightmare_probability = normalized_score * 100
@@ -375,29 +376,28 @@ class NightmareDetector:
             severity = classification["severity"]
             score = classification["anomaly_score"]
 
-            if severity == "mild":
-                insights.append("⚠️ Mild nightmare markers detected")
-                insights.append("Slight elevation in cortical arousal patterns")
-                insights.append("Consider monitoring sleep quality over time")
+            if severity == "nightmare":
+                insights.append("Nightmare Markers present")
+                insights.append("Consider monitoring sleep quality over time, intervention advised if multiple recordings are ")
 
-            elif severity == "moderate":
-                insights.append("⚠️ Moderate nightmare activity detected")
-                insights.append("Significant spectral power abnormalities detected")
-                insights.append(
-                    "Clinical evaluation recommended for persistent symptoms"
-                )
+            # elif severity == "moderate":
+            #     insights.append("⚠️ Moderate nightmare activity detected")
+            #     insights.append("Significant spectral power abnormalities detected")
+            #     insights.append(
+            #         "Clinical evaluation recommended for persistent symptoms"
+            #     )
 
-            elif severity == "severe":
-                insights.append("🔴 Severe nightmare disorder markers present")
-                insights.append("Multiple arousal indicators across frequency bands")
-                insights.append("Immediate clinical intervention advised")
+            # elif severity == "nightmare":
+            #     insights.append("🔴 nightmare disorder markers present")
+            #     insights.append("Multiple arousal indicators across frequency bands")
+            #     insights.append("Immediate clinical intervention advised")
 
-            else:  # critical
-                insights.append("🔴 CRITICAL: Extreme nightmare activity")
-                insights.append(
-                    f"Anomaly score ({score:.2f}) significantly exceeds threshold"
-                )
-                insights.append("Urgent psychiatric evaluation recommended")
+            # else:  # critical
+            #     insights.append("🔴 nightmare: Extreme nightmare activity")
+            #     insights.append(
+            #         f"Anomaly score ({score:.2f}) significantly exceeds threshold"
+            #     )
+            #     insights.append("Urgent psychiatric evaluation recommended")
 
             # Band-specific insights (identify dominant contributors)
             sorted_bands = sorted(
@@ -742,10 +742,11 @@ async def model_info(stage: StageType):
         },
         "severity_levels": {
             0: "normal",
-            1: "mild",
-            2: "moderate",
-            3: "severe",
-            4: "critical",
+            1: "nightmare"
+            # 1: "mild",
+            # 2: "moderate",
+            # 3: "severe",
+            # 4: "critical",
         },
         "bands": Config.BANDS,
         "embedding_dim": detector.net.total_embedding_dim,
@@ -773,7 +774,7 @@ async def compare_stages(
         rem_classification["severity_level"], n2_classification["severity_level"]
     )
 
-    severity_map = {0: "normal", 1: "mild", 2: "moderate", 3: "severe", 4: "critical"}
+    severity_map = {0: "normal", 1: "nightmare"}
 
     return {
         "REM": {
@@ -798,10 +799,7 @@ def _get_recommendation(severity_level: int) -> str:
     """Generate clinical recommendation based on severity"""
     recommendations = {
         0: "No intervention needed. Continue normal sleep hygiene practices.",
-        1: "Monitor symptoms. Consider sleep diary and stress management techniques.",
-        2: "Clinical consultation recommended. Consider CBT-I or imagery rehearsal therapy.",
-        3: "Clinical intervention advised. Psychiatric evaluation for trauma-focused therapy.",
-        4: "Urgent psychiatric evaluation recommended. Consider medication and intensive therapy.",
+        1: "Monitor symptoms. Consider sleep diary and stress management techniques, Consider medication and intensive therapy.",
     }
     return recommendations.get(severity_level, "Unknown severity level")
 

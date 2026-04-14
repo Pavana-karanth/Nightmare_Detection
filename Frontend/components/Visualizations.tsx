@@ -165,10 +165,10 @@ export default function Visualizations({ results }: AnalysisProps) {
 
               const severityColors: Record<string, string> = {
                 normal: "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-300",
-                mild: "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 border-yellow-300",
-                moderate: "bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 border-orange-300",
-                severe: "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 border-red-300",
-                critical: "bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 border-purple-300",
+                nightmare: "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 border-red-300",
+                // moderate: "bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 border-orange-300",
+                // severe: "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 border-red-300",
+                // critical: "bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 border-purple-300",
               }
 
               return Object.entries(severityMap).map(([severity, count]) => (

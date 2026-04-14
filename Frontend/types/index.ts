@@ -2,8 +2,8 @@ export type Tab = "overview" | "upload" | "analysis" | "visualizations"
 
 export interface Classification {
   is_nightmare: boolean
-  severity: "normal" | "mild" | "moderate" | "severe" | "critical"
-  severity_level: number
+  severity: "normal" | "nightmare" 
+  // severity_level: number
   nightmare_probability: number
   normal_probability: number
   confidence: number
